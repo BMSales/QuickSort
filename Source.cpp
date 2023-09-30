@@ -2,20 +2,20 @@
 #include <stdlib.h>
 #include <time.h>
 
-
-void genArray(int** array, int n) {
+int size;
+void genArray(int** array, int size) {
 	srand(time(0));
-	(*array) = (int*)malloc(n * sizeof(int));
-	for (int i = 0; i < n; i++) {
+	(*array) = (int*)malloc(size * sizeof(int));
+	for (int i = 0; i < size; i++) {
 		(*array)[i] = rand() % 100;
 	}
 }
 
-void showArray(int* array, int n) {
-	for (int i = 0; i < n; i++) {
+void showArray(int* array, int size) {
+	for (int i = 0; i < size; i++) {
 		printf("%2d ", array[i]);
 	}
-	printf("\n");
+	printf("\n\n");
 }
 
 int Quick(int* array, int start, int pivot, int greater) {
@@ -34,19 +34,19 @@ int Quick(int* array, int start, int pivot, int greater) {
 	change = array[pivot];
 	array[pivot] = array[greater];
 	array[greater] = change;
-
+	printf("Pivot: %d\nMoved to: %d\n", array[greater], greater);
+	showArray(array, size);
 	Quick(array, start, greater - 1, start);
 	Quick(array, greater + 1, pivot, greater + 1);
 }
 
 int main() {
-	int n;
 	int* array;
-	scanf_s("%d", &n);
-	genArray(&array, n);
-	showArray(array, n);
-	Quick(array, 0, n - 1, 0);
-	showArray(array, n);
+	scanf_s("%d", &size);
+	genArray(&array, size);
+	showArray(array, size);
+	Quick(array, 0, size - 1, 0);
+	showArray(array, size);
 	free(array);
 	return 0;
 }
