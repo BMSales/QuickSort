@@ -5,10 +5,10 @@
 	
 int main() {
 	int size, type;
-	printf("Determine the size of the array (1 - 1000):\n");
+	printf("Determine the size of the array (1 - 200):\n");
 	while (1) {
 		scanf_s("%d", &size);
-		if (size < 1 || size > 100) {
+		if (size < 1 || size > 200) {
 			printf("Invalid input\n");
 		}
 		else {
@@ -26,18 +26,18 @@ int main() {
 		}
 	}
 	int* array;
-	GenArray(&array, size);
-	ShowArray(array, size);
+	Array_Generate(&array, size);
+	Array_Show(array, size);
 	if (type == 1) {
-		FirstQuick(array, 0, size - 1, size);
+		Quick_Sort_First(array, 0, size - 1, size);
 	}
 	else if (type == 2) {
-		LastQuick(array, 0, size - 1, size);
+		Quick_Sort_Last(array, 0, size - 1, size);
 	}
 	else {
-		RandQuick(array, 0, size - 1, size);
+		Quick_Sort_Random(array, 0, size - 1, size);
 	}
-	ShowArray(array, size);
+	Array_Show(array, size);
 	free(array);
 	return 0;
 }
